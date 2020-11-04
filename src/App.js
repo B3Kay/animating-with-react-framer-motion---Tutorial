@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardGrid, Container, Header } from "./Elements";
+import { StaggeredList } from "./component/StaggeredList";
 import "./App.css";
 import Menu from "./Menu";
 import blue from "./blue.png";
@@ -7,33 +9,51 @@ import purp from "./purp.png";
 import black from "./black.png";
 import green from "./green.png";
 
+const Modal = ({ isOpen, setOpen, children }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          style={{
+            position: "fixed",
+            top: "30px",
+            left: "50%",
+            transform: "translate3d(-50%,0,0)",
+          }}
+        >
+          <motion.div initial={{ x: 50 }} animate={{ x: 0 }} exit={{ x: -50 }}>
+            <button onClick={() => setOpen((prevRes) => (prevRes ? 0 : 1))}>
+              Close Modal
+            </button>
+            {children}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 function App() {
+  const [isOpen, setOpen] = useState(false);
   return (
     <div>
       <Header>
         <Menu />
         <h1>Header</h1>
       </Header>
+
       <Container>
         <h2>Super Cool</h2>
+
         <CardGrid>
-          <Card style={{ background: "var(--purp)" }}>
-            <h3>Some card</h3>
-            <img src={purp} />
-          </Card>
-          <Card style={{ background: "var(--blue)" }}>
-            <h3>Some card</h3>
-            <img src={blue} />
-          </Card>
-          <Card style={{ background: "var(--black)" }}>
-            <h3>Some card</h3>
-            <img src={black} />
-          </Card>
-          <Card style={{ background: "var(--green)" }}>
-            <h3>Some card</h3>
-            <img src={green} />
-          </Card>
+          <button onClick={() => setOpen((prevRes) => !prevRes)}>
+            Toggle Modal
+          </button>
         </CardGrid>
+        {<StaggeredList isOpen={isOpen} />}
       </Container>
     </div>
   );
