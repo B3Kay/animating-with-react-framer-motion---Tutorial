@@ -1,61 +1,112 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardGrid, Container, Header } from "./Elements";
+import { Container } from "./Elements";
+import { motion } from "framer-motion";
 import { StaggeredList } from "./component/StaggeredList";
-import "./App.css";
-import Menu from "./Menu";
-import blue from "./blue.png";
-import purp from "./purp.png";
-import black from "./black.png";
-import green from "./green.png";
+import { Slider } from "./component/Slider";
+import styled from "styled-components";
+import { Switch } from "./component/Switch";
+import { sample } from "underscore";
+import data from "./data/exercice";
 
-const Modal = ({ isOpen, setOpen, children }) => {
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          style={{
-            position: "fixed",
-            top: "30px",
-            left: "50%",
-            transform: "translate3d(-50%,0,0)",
-          }}
-        >
-          <motion.div initial={{ x: 50 }} animate={{ x: 0 }} exit={{ x: -50 }}>
-            <button onClick={() => setOpen((prevRes) => (prevRes ? 0 : 1))}>
-              Close Modal
-            </button>
-            {children}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
+export const ColorHighligt = styled(motion.span)`
+  background: linear-gradient(to left, #ff1d68, #b500e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-transform: uppercase;
+  font-weight: 900;
+`;
+
+const FinnishText = styled(ColorHighligt)`
+  font-style: italic;
+`;
+
+const Header = styled.h1`
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 6rem;
+  margin-bottom: 16px;
+  line-height: 1;
+`;
+
+const SubHeader = styled.h2`
+  text-align: center;
+  color: white;
+  font-weight: 300;
+  font-size: 3rem;
+`;
+
+const SliderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const StyledLabel = styled.label`
+  margin-bottom: 1rem;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+`;
+
+const bodyWeightData = data.filter((item) => item.equipment === "Body Weight");
 
 function App() {
   const [isOpen, setOpen] = useState(false);
+  const [isAlreadyDone, setDone] = useState(false);
+
+  const [exercicesAmount, setExercicesAmount] = useState(4);
+
+  const getSubset = () => sample(bodyWeightData, exercicesAmount);
+  const [list, setlist] = useState(getSubset());
+
+  const updateList = () => setlist(getSubset());
+
+  const handleOpen = () => {
+    if (!isOpen) updateList();
+    setOpen((prevRes) => !prevRes);
+    setDone(false);
+  };
+
   return (
-    <div>
+    <Container>
       <Header>
-        <Menu />
-        <h1>Header</h1>
+        Exercice <ColorHighligt>generator</ColorHighligt>
       </Header>
 
-      <Container>
-        <h2>Super Cool</h2>
+      <SubHeader>Beach-Body-202X</SubHeader>
 
-        <CardGrid>
-          <button onClick={() => setOpen((prevRes) => !prevRes)}>
-            Toggle Modal
-          </button>
-        </CardGrid>
-        {<StaggeredList isOpen={isOpen} />}
-      </Container>
-    </div>
+      <SliderWrapper>
+        <StyledLabel>You have choosen {exercicesAmount} exercices</StyledLabel>
+        <Slider
+          // defaultValues={4}
+          onChange={(val) => {
+            setExercicesAmount(val);
+            if (!isOpen) setlist(getSubset());
+          }}
+          marks
+          min={1}
+          max={8}
+        />
+      </SliderWrapper>
+
+      <Switch onChange={(isOn) => handleOpen(isOn)} />
+      
+      {isAlreadyDone && (
+        <Header>
+          <FinnishText>FINNISHED!</FinnishText>
+        </Header>
+      )}
+      
+      {
+        <StaggeredList
+          list={list}
+          isOpen={isOpen}
+          callback={() => setDone(true)}
+        />
+      }
+    </Container>
   );
 }
 

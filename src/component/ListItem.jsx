@@ -1,43 +1,104 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-// import styled from "styled-components";
+import styled from "styled-components";
+import { bgColors } from "../helper/gradient";
+import { ColorHighligt } from "../App";
 
-// "linear-gradient(45deg, rgba(101,13,137) 0%, rgba(2,55,136) 100%)",
-// "linear-gradient(45deg, rgba(212,0,120,1) 0%, rgba(38,20,71,1) 100%)",
-// "linear-gradient(45deg, rgba(36,23,52,1) 0%, rgba(46,33,87,1) 100%)",
-const bgColors = [
-  "linear-gradient(45deg, rgba(186, 109, 243) 0%, rgba(246,1,157) 100%)",
-  "linear-gradient(45deg, rgba(45,226,230,1) 0%, rgba(255,56,100,1) 100%)",
-  "linear-gradient(45deg, rgba(255,108,17) 0%, rgba(246,1,157,1) 100%)",
-  "linear-gradient(45deg, rgba(246,1,157) 0%, rgba(212,0,120) 100%)",
-];
+const StyledMotion = styled(motion.div)`
+  ${(props) => bgColors[props.index]}
+  /* background-color: #3a3c5b; */
+  padding: 2rem;
+  padding-left: 3rem;
+  /* border-radius: 1.5rem; */
 
-const style = {
-  padding: "2rem",
-  borderRadius: "1.5rem",
-  marginBottom: "1rem",
-  background: "rgb(45,226,230)",
-  color: "white",
-};
+  color: white;
+
+  display: block;
+  text-decoration: none;
+
+  font-weight: 500;
+  text-transform: uppercase;
+`;
 
 const variants = {
-  open: {
+  open: (index) => ({
     opacity: 1,
     x: 0,
+    transition: {
+      delay: index * 0.3,
+    },
+  }),
+  closed: {
+    opacity: 0,
+    x: 150,
   },
-  closed: { opacity: 0, x: 150 },
 };
 
-export const ListItem = ({ name, index }) => {
-  style.background = bgColors[index];
+const StyledListItem = styled(motion.div)`
+  background-color: rgb(39 47 60);
+  /* border-radius: 1.5rem; */
+  overflow: hidden;
+  margin-bottom: 1rem;
+`;
+
+export const ListItem = ({ exercice, index }) => {
+  const regex = /\((.*?)\)/;
+  const res = regex.exec(exercice.example);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => setIsOpen(!isOpen);
+
   return (
-    <motion.div
+    <StyledListItem
       variants={variants}
+      initial={{ x: 150, opacity: 0 }}
+      custom={index}
       whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-      style={{ ...style }}
+      // whileTap={{ scale: 0.95 }}
+      index={index}
+      layout
+      onClick={toggleOpen}
     >
-      {name}
-    </motion.div>
+      <StyledMotion index={index} layout style={{ fontSize: "1rem" }}>
+        {exercice.exercise}
+      </StyledMotion>
+      {isOpen && <Info img={res[1]} {...exercice} />}
+    </StyledListItem>
   );
 };
+
+const InfoMotionDiv = styled(motion.div)`
+  padding: 1rem 2rem;
+`;
+
+const Info = ({ img, major_muscle, modifications, notes }) => {
+  return (
+    <InfoMotionDiv
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <StyledInfoRow>
+        <ColorHighligt>Muscle groups:</ColorHighligt> {major_muscle}
+      </StyledInfoRow>
+      <StyledInfoRow>
+        <ColorHighligt>Modifications:</ColorHighligt> {modifications}
+      </StyledInfoRow>
+      <StyledInfoRow>
+        <ColorHighligt>Notes:</ColorHighligt> {notes}
+      </StyledInfoRow>
+      <StyledInfoRow>
+        <a href={img} target="_blank" style={{ color: "white" }}>
+          Img
+        </a>
+      </StyledInfoRow>
+    </InfoMotionDiv>
+  );
+};
+
+const StyledInfoRow = styled.div`
+  color: white;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+`;

@@ -1,29 +1,45 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimateSharedLayout } from "framer-motion";
 import { ListItem } from "./ListItem";
+import styled from "styled-components";
 
-// How to become strong like a 80s action hero / Van Dam / Arnold / Dolph lundgren, kanske en bild på doffe.
-
-const collection = ["Burpee", "Push up", "Squat", "Pullup"];
+// equipment: "Body Weight"
+// example: "200.gif (https://dl.airtable.com/Y0JUbM2YTfe8uRz0jb5w_200.gif)"
+// exercise: "Bicycle Crunch"
+// exercise_type: "Weight"
+// major_muscle: "Core"
+// minor_muscle: null
+// modifications: "Easier: Move Slower, Legs higher in the air↵Harder: Keep shoulder blades off the ground entire time"
+// notes: "The lower the "straight" leg is to the ground the more challenging this exercise is. "
 
 const variants = {
   open: {
-    transition: { staggerChildren: 0.3, delayChildren: 0.07 },
+    // transition: { staggerChildren: 0.3, delayChildren: 0.5 },
   },
   closed: {
-    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+      when: "afterCildren",
+    },
   },
 };
 
-export const StaggeredList = ({ isOpen }) => {
+const StyledList = styled(motion.div)``;
+
+export const StaggeredList = ({ list, isOpen = false, callback }) => {
   return (
-    <motion.div variants={variants} animate={isOpen ? "open" : "closed"}>
-      {collection.map((item, index) => (
-        <ListItem name={item} index={index} key={index} />
-      ))}
-      {/* <motion.li variants={item}>Item 1</motion.li>
-        <motion.li variants={item}>Item 2</motion.li>
-        <motion.li variants={item}>Item 3</motion.li> */}
-    </motion.div>
+    <AnimateSharedLayout>
+      <StyledList
+        variants={variants}
+        animate={isOpen ? "open" : "closed"}
+        onAnimationComplete={() => !isOpen && callback()}
+        layout
+      >
+        {list.map((item, index) => (
+          <ListItem exercice={item} index={index} key={item.exercice} />
+        ))}
+      </StyledList>
+    </AnimateSharedLayout>
   );
 };
