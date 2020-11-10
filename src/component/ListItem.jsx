@@ -17,6 +17,6 @@ const StyledMotion = styled(motion.div)`
   margin-bottom: 1rem;
 `;
 
-export const ListItem = ({ exercice }) => {
+export const ListItem = ({ exercice, index }) => {
   return <StyledMotion>{exercice.exercise}</StyledMotion>;
 };
