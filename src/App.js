@@ -16,11 +16,6 @@ export const ColorHighligt = styled(motion.span)`
   text-transform: uppercase;
   font-weight: 900;
 `;
-
-const FinnishText = styled(ColorHighligt)`
-  font-style: italic;
-`;
-
 const Header = styled.h1`
   text-align: center;
   color: white;
@@ -30,14 +25,6 @@ const Header = styled.h1`
   margin-bottom: 16px;
   line-height: 1;
 `;
-
-const SubHeader = styled.h2`
-  text-align: center;
-  color: white;
-  font-weight: 300;
-  font-size: 3rem;
-`;
-
 const SliderWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,19 +41,15 @@ const bodyWeightData = data.filter((item) => item.equipment === "Body Weight");
 
 function App() {
   const [isOpen, setOpen] = useState(false);
-  const [isAlreadyDone, setDone] = useState(false);
   const initialEx = 1;
   const [exercicesAmount, setExercicesAmount] = useState(initialEx);
-
   const getSubset = () => sample(bodyWeightData, exercicesAmount);
   const [list, setlist] = useState(getSubset());
 
   const updateList = () => setlist(getSubset());
-
   const handleOpen = () => {
     if (!isOpen) updateList();
     setOpen((prevRes) => !prevRes);
-    setDone(false);
   };
 
   return (
@@ -74,8 +57,6 @@ function App() {
       <Header>
         Exercice <ColorHighligt>generator</ColorHighligt>
       </Header>
-
-      <SubHeader>Beach-Body-202X</SubHeader>
 
       <SliderWrapper>
         <StyledLabel>You have choosen {exercicesAmount} exercices</StyledLabel>
@@ -93,22 +74,7 @@ function App() {
 
       <Switch onChange={(isOn) => handleOpen(isOn)} />
 
-      {/* {isAlreadyDone && (
-        <Header>
-          <FinnishText>FINISHED!</FinnishText>
-        </Header>
-      )} */}
-      {/* LISTAN */}
-      {/* LISTAN */}
-      {/* LISTAN */}
-      {/* LISTAN */}
-      {
-        <StaggeredList
-          list={list}
-          isOpen={isOpen}
-          callback={() => setDone(true)}
-        />
-      }
+      {<StaggeredList list={list} isOpen={isOpen} />}
     </Container>
   );
 }
