@@ -17,26 +17,6 @@ const StyledMotion = styled(motion.div)`
   margin-bottom: 1rem;
 `;
 
-const variants = {
-  open: {
-    opacity: 1,
-    x: 0,
-  },
-  closed: {
-    opacity: 0,
-    x: 150,
-  },
-};
-
-export const ListItem = ({ exercice, index }) => {
-  return (
-    <StyledMotion
-      variants={variants}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      index={index}
-    >
-      {exercice.exercise}
-    </StyledMotion>
-  );
+export const ListItem = ({ exercice }) => {
+  return <StyledMotion>{exercice.exercise}</StyledMotion>;
 };

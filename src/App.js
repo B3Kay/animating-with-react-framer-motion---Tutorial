@@ -55,7 +55,7 @@ function App() {
   return (
     <Container>
       <Header>
-        Exercice <ColorHighligt>generator</ColorHighligt>
+        Workout <ColorHighligt>generator</ColorHighligt>
       </Header>
 
       <SliderWrapper>

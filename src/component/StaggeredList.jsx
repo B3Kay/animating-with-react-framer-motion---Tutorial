@@ -1,29 +1,13 @@
 import React from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { ListItem } from "./ListItem";
 
-const variants = {
-  open: {
-    transition: { staggerChildren: 0.3, delayChildren: 0.5 },
-  },
-  closed: {
-    transition: {
-      staggerChildren: 0.05,
-      staggerDirection: -1,
-    },
-  },
-};
-
-export const StaggeredList = ({ list, isOpen = false }) => {
+export const StaggeredList = () => {
   return (
-    <motion.div
-    variants={variants}
-    animate={isOpen ? "open" : "closed"}
-    initial="closed"
-    >
-      {list.map((item, index) => (
-        <ListItem exercice={item} index={index} key={item.exercice} />
+    <div>
+      {[1, 2, 3, 4].map((item) => (
+        <ListItem exercice={item} />
       ))}
-    </motion.div>
+    </div>
   );
 };
