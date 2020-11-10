@@ -6,7 +6,7 @@ export const StaggeredList = ({ list, isOpen = false }) => {
   return (
     <div>
       {[1, 2, 3, 4].map((item) => (
-        <ListItem exercice={item} />
+        <ListItem exercice={item} key={item.exercice} />
       ))}
     </div>
   );
