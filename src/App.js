@@ -55,8 +55,8 @@ const bodyWeightData = data.filter((item) => item.equipment === "Body Weight");
 function App() {
   const [isOpen, setOpen] = useState(false);
   const [isAlreadyDone, setDone] = useState(false);
-
-  const [exercicesAmount, setExercicesAmount] = useState(4);
+  const initialEx = 1;
+  const [exercicesAmount, setExercicesAmount] = useState(initialEx);
 
   const getSubset = () => sample(bodyWeightData, exercicesAmount);
   const [list, setlist] = useState(getSubset());
@@ -80,7 +80,7 @@ function App() {
       <SliderWrapper>
         <StyledLabel>You have choosen {exercicesAmount} exercices</StyledLabel>
         <Slider
-          // defaultValues={4}
+          defaultValues={initialEx}
           onChange={(val) => {
             setExercicesAmount(val);
             if (!isOpen) setlist(getSubset());

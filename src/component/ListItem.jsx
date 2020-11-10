@@ -51,7 +51,7 @@ export const ListItem = ({ exercice, index }) => {
   return (
     <StyledListItem
       variants={variants}
-      initial={{ x: 150, opacity: 0 }}
+      initial={variants.closed}
       custom={index}
       whileHover={{ scale: 1.1 }}
       // whileTap={{ scale: 0.95 }}

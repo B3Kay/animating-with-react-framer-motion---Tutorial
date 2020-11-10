@@ -33,6 +33,7 @@ export const StaggeredList = ({ list, isOpen = false, callback }) => {
       <StyledList
         variants={variants}
         animate={isOpen ? "open" : "closed"}
+        initial="closed"
         onAnimationComplete={() => !isOpen && callback()}
         layout
       >
