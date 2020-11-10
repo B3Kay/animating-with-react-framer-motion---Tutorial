@@ -1,23 +1,24 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { bgColors } from "../helper/gradient";
-import { ColorHighligt } from "../App";
+import {Info} from './Info';
 
 const StyledMotion = styled(motion.div)`
   ${(props) => bgColors[props.index]}
-  /* background-color: #3a3c5b; */
   padding: 2rem;
   padding-left: 3rem;
-  /* border-radius: 1.5rem; */
-
   color: white;
-
   display: block;
   text-decoration: none;
-
   font-weight: 500;
   text-transform: uppercase;
+`;
+
+const StyledListItem = styled(motion.div)`
+  background-color: rgb(39 47 60);
+  overflow: hidden;
+  margin-bottom: 1rem;
 `;
 
 const variants = {
@@ -34,12 +35,7 @@ const variants = {
   },
 };
 
-const StyledListItem = styled(motion.div)`
-  background-color: rgb(39 47 60);
-  /* border-radius: 1.5rem; */
-  overflow: hidden;
-  margin-bottom: 1rem;
-`;
+
 
 export const ListItem = ({ exercice, index }) => {
   const regex = /\((.*?)\)/;
@@ -54,7 +50,7 @@ export const ListItem = ({ exercice, index }) => {
       initial={variants.closed}
       custom={index}
       whileHover={{ scale: 1.1 }}
-      // whileTap={{ scale: 0.95 }}
+      // whileTap={{ scale: 0.9 }}
       index={index}
       layout
       onClick={toggleOpen}
@@ -66,39 +62,3 @@ export const ListItem = ({ exercice, index }) => {
     </StyledListItem>
   );
 };
-
-const InfoMotionDiv = styled(motion.div)`
-  padding: 1rem 2rem;
-`;
-
-const Info = ({ img, major_muscle, modifications, notes }) => {
-  return (
-    <InfoMotionDiv
-      layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <StyledInfoRow>
-        <ColorHighligt>Muscle groups:</ColorHighligt> {major_muscle}
-      </StyledInfoRow>
-      <StyledInfoRow>
-        <ColorHighligt>Modifications:</ColorHighligt> {modifications}
-      </StyledInfoRow>
-      <StyledInfoRow>
-        <ColorHighligt>Notes:</ColorHighligt> {notes}
-      </StyledInfoRow>
-      <StyledInfoRow>
-        <a href={img} target="_blank" style={{ color: "white" }}>
-          Img
-        </a>
-      </StyledInfoRow>
-    </InfoMotionDiv>
-  );
-};
-
-const StyledInfoRow = styled.div`
-  color: white;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-`;

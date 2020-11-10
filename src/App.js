@@ -92,13 +92,16 @@ function App() {
       </SliderWrapper>
 
       <Switch onChange={(isOn) => handleOpen(isOn)} />
-      
-      {isAlreadyDone && (
+
+      {/* {isAlreadyDone && (
         <Header>
-          <FinnishText>FINNISHED!</FinnishText>
+          <FinnishText>FINISHED!</FinnishText>
         </Header>
-      )}
-      
+      )} */}
+      {/* LISTAN */}
+      {/* LISTAN */}
+      {/* LISTAN */}
+      {/* LISTAN */}
       {
         <StaggeredList
           list={list}

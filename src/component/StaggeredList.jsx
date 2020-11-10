@@ -1,7 +1,6 @@
 import React from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { ListItem } from "./ListItem";
-import styled from "styled-components";
 
 // equipment: "Body Weight"
 // example: "200.gif (https://dl.airtable.com/Y0JUbM2YTfe8uRz0jb5w_200.gif)"
@@ -25,12 +24,11 @@ const variants = {
   },
 };
 
-const StyledList = styled(motion.div)``;
 
 export const StaggeredList = ({ list, isOpen = false, callback }) => {
   return (
     <AnimateSharedLayout>
-      <StyledList
+      <motion.div
         variants={variants}
         animate={isOpen ? "open" : "closed"}
         initial="closed"
@@ -40,7 +38,7 @@ export const StaggeredList = ({ list, isOpen = false, callback }) => {
         {list.map((item, index) => (
           <ListItem exercice={item} index={index} key={item.exercice} />
         ))}
-      </StyledList>
+      </motion.div>
     </AnimateSharedLayout>
   );
 };
