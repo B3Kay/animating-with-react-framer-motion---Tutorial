@@ -5,8 +5,8 @@ import { ListItem } from "./ListItem";
 export const StaggeredList = ({ list, isOpen = false }) => {
   return (
     <div>
-      {[1, 2, 3, 4].map((item) => (
-        <ListItem exercice={item} key={item.exercice} />
+      {[1, 2, 3, 4].map((item, index) => (
+        <ListItem exercice={item} index={index} key={item.exercice} />
       ))}
     </div>
   );
