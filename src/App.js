@@ -93,11 +93,11 @@ function App() {
 
       <Switch onChange={(isOn) => handleOpen(isOn)} />
 
-      {/* {isAlreadyDone && (
+      {isAlreadyDone && (
         <Header>
           <FinnishText>FINISHED!</FinnishText>
         </Header>
-      )} */}
+      )}
       {/* LISTAN */}
       {/* LISTAN */}
       {/* LISTAN */}

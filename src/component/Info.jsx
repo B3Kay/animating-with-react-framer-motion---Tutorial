@@ -25,7 +25,7 @@ export const Info = ({ img, major_muscle, modifications, notes }) => {
         <ColorHighligt>Notes:</ColorHighligt> {notes}
       </StyledInfoRow>
       <StyledInfoRow>
-        <a href={img} target="_blank" style={{ color: "white" }}>
+        <a href={img} target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
           Img
         </a>
       </StyledInfoRow>
