@@ -5,7 +5,7 @@ I fully recommend watching his youtube tutorial if you want to learn more about 
 Working example deployed to netlify [here!](https://exercice-generator.netlify.app/)
 ## TUTORIAL
 
-The documentation for this exist in [Tutorial.md](https://github.com/B3Kay/animating-react-framer-motion/blob/demo-redy/Tutorial.md)
+The documentation for this exist in [Tutorial.en.md](https://github.com/B3Kay/animating-react-framer-motion/blob/demo-redy/Tutorial.md)
 ## Available Scripts
 
 In the project directory, you can run:
