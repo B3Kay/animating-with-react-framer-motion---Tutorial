@@ -1,21 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-And inspired by [Scott Stolinski](https://github.com/stolinski), this is forked from his tutorial but doesn't contain any original code then the create react app. 
-I fully recommend watching his youtube tutorial if you want to learn more about animating with the [Framer-Motion API](https://www.framer.com/api/motion/) because that's where I started.
+# 🌈 Animating React with Framer Motion Tutorial 🚀
 
-Working example deployed to netlify [here!](https://exercice-generator.netlify.app/)
-## TUTORIAL
+This project kicks off with the magic of [Create React App](https://github.com/facebook/create-react-app) and a sprinkle of inspiration from the talented [Scott Stolinski](https://github.com/stolinski). 🙌 While it's a fork from his tutorial, you'll find no original code here, just the power of Create React App! 🚀
 
-The documentation for this exist in [Tutorial.md](https://github.com/B3Kay/animating-react-framer-motion/blob/main/TUTORIAL.en.md)
-## Available Scripts
+For an in-depth dive into animating with the [Framer-Motion API](https://www.framer.com/api/motion/), I highly recommend checking out Scott's YouTube tutorial—it's where my animation journey began!
 
-In the project directory, you can run:
+🚀 **[Check out the deployed example on Netlify!](https://exercice-generator.netlify.app/)** 🚀
+
+## 📚 TUTORIAL
+
+All the secrets to unleashing animation awesomeness are unveiled in [Tutorial.md](https://github.com/B3Kay/animating-react-framer-motion/blob/main/TUTORIAL.en.md). Dive in and let the animation adventure begin! 🎉
+
+## 🚀 Available Scripts
+
+In the magical realm of this project directory, wield the following scripts:
 
 ### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Summon the app into the development mode! 🧙‍♂️ Open [http://localhost:3000](http://localhost:3000) to witness its brilliance in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-
+🔄 The page will reload if you cast your coding spells and make edits. 🧙‍♀️ Beware of lint errors—they may reveal themselves in the console, but fear not, for you shall conquer them! 💪
